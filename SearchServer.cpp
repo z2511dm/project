@@ -277,6 +277,10 @@ private:
     //ОПРЕДЕЛЯЕТ ТИП СЛОВА ЗАПРОСА
     QueryWord ParseQueryWord(string text) const
     {
+        if (!IsValidWord(text))
+        {
+            throw invalid_argument("invalid characters in query word: "s + text);
+        }
         if (text[0] == '-' && text.size() == 1)
         {
             throw invalid_argument("no word after \"-\" in query"s);
@@ -307,10 +311,6 @@ private:
         Query query;
         for (const string& word : SplitIntoWords(text))
         {
-            if (!IsValidWord(word))
-            {
-                throw invalid_argument("invalid characters in query word: "s + word);
-            }
             const QueryWord query_word = ParseQueryWord(word);
             if (!query_word.is_stop)
             {
