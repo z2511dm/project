@@ -8,14 +8,11 @@ using namespace std;
 template <typename It>
 void PrintRange(It range_begin, It range_end)
 {
-    if (range_begin != range_end)
+    for (; range_begin != range_end; ++range_begin)
     {
-        for (; range_begin != range_end; ++range_begin)
-        {
-            cout << *range_begin << " ";
-        }
-        cout << endl;
+        cout << *range_begin << " ";
     }
+    cout << endl;
 }
 
 template <typename T, typename T2>
@@ -23,7 +20,7 @@ void FindAndPrint(T cont, T2 elem)
 {
     auto result = find(cont.begin(), cont.end(), elem);
     PrintRange(cont.begin(), result);
-    if (result != cont.end()) PrintRange(result, cont.end());
+    PrintRange(result, cont.end());
 }
 
 int main()
@@ -32,6 +29,6 @@ int main()
     cout << "Test1"s << endl;
     FindAndPrint(test, 3);
     cout << "Test2"s << endl;
-    FindAndPrint(test, 0); 
+    FindAndPrint(test, 0); // элемента 0 нет в контейнере
     cout << "End of tests"s << endl;
 }
